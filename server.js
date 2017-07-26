@@ -21,7 +21,83 @@ var yelp = new Yelp({
 io.on('connection', (socket) => {
     
     console.log("new connection: " + socket.id);
-
+    var today = new Date();
+    
+    socket.on("get all going",()=>{
+        MongoClient.connect(url, (err,db)=>{
+          if(err)
+            console.log(err);
+          else
+          {
+            var bars = db.collection('bars');
+            var getAll = ()=>{
+              bars.find({},{})
+                  .toArray((err,data)=>{
+                    if(err)
+                     console.log(err);
+                    else
+                    {
+                      console.log("sending: " + data.length);
+                      socket.emit("receive all going",{going: data});
+                      db.close();
+                    }
+                  });
+            };
+            getAll(db);
+          }
+          
+        });
+    });
+    
+    socket.on("update",(data)=>{
+      //{post_id: id, user_id: this.state.userData}
+      MongoClient.connect(url,(err,db)=>{
+        if(err)
+          console.log(err);
+        else
+        {
+          var bars = db.collection('bars');
+          var findOne = ()=>{
+            bars.findOne({_id: data.post_id},(err,result)=>{
+              if(err)
+                console.log(err);
+              else
+              {
+                if(result)
+                {
+                  io.sockets.emit("update one",{_id: data.post_id,going: data.user_id});
+                  bars.update({_id: data.post_id}, {$push: {going: data.user_id}});
+                }
+                else
+                {
+                  io.sockets.emit("add one",{_id: data.post_id, going: [data.user_id]});
+                  bars.insert({_id: data.post_id, going: [data.user_id]});
+                }
+              }
+            });
+          };
+          findOne(db,()=>{db.close();});
+        }
+      });
+    });
+    //socket.emit("pull",{_id: id, pull: this.state.userData});
+    
+    socket.on("pull",(data)=>{
+      MongoClient.connect(url,(err,db)=>{
+        if(err)
+         console.log(err);
+        else
+        {
+          var bars = db.collection('bars');
+          var update = ()=>{
+            bars.update({_id: data._id},{$pull: {going: data.pull}});
+            socket.broadcast.emit("pull one",{_id: data._id,going: data.pull});
+          };
+          update(db,()=>{db.close();});
+        }
+      });  
+    });
+    
     app.get('/getbars/:zip_code',(req,res)=>{
        console.log("getting for zip code: " + req.params.zip_code);  
         yelp.search({term: "bar",location: req.params.zip_code, limit: 25})
