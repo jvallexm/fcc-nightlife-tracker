@@ -1,4 +1,7 @@
 import React from 'react';
+import $ from 'jquery';
+import io from 'socket.io-client';
+const socket=io();
 
 export default class App extends React.Component
 {
@@ -8,6 +11,16 @@ export default class App extends React.Component
     this.state ={
       data: {businesses: []}
     };
+    this.enterSearch = this.enterSearch.bind(this);
+  }
+  enterSearch(zip_code)
+  {
+    console.log("trying to find: " + zip_code);
+    $.getJSON('/getbars/'+zip_code,function (data){
+      console.log("got this many: " + data.businesses.length);
+      console.log(data.businesses);
+      this.setState({data: data});
+    }.bind(this));
   }
   render()
   {
@@ -16,7 +29,7 @@ export default class App extends React.Component
         <h1>I Love the Night Life Baby</h1>
         <h3>Using the Yelp API!</h3> 
         </div>
-        <SearchBar />
+        <SearchBar enterSearch={this.enterSearch}/>
         <div className="text-center container-fluid max-1100">
          {this.state.data.businesses.map((d,i)=>
        <EachPlace key={JSON.stringify(d)} place={d} />)}
@@ -34,6 +47,7 @@ class SearchBar extends React.Component
       search: ""
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(e)
   {
@@ -45,13 +59,17 @@ class SearchBar extends React.Component
     else
      this.setState({search: e.target.value});
   }
+  handleSubmit()
+  {
+    this.props.enterSearch(this.state.search);
+  }
   render()
   {
     return(
       <div>
         Enter Your Zip Code:<input onChange={this.handleChange}
                                     value={this.state.search}/> 
-        <button>Search <i className="fa fa-search"/></button>
+        <button onClick={this.handleSubmit}>Search <i className="fa fa-search"/></button>
       </div>  
     );
   }
@@ -74,7 +92,7 @@ class EachPlace extends React.Component
        <img src={this.props.place.image_url} />
        </div> 
         <div className="col-sm-6  middle-text padding-10">
-                  <h6>{this.props.place.location.address1}{this.props.place.location.address2.length > 0 ? " "+this.props.place.location.address2: ""}</h6>
+                  <h6>{this.props.place.location.address1}</h6>
         <h6>{this.props.place.location.city}, {this.props.place.location.zip_code}</h6>
           <h6>{this.props.place.price}</h6>
           <h6>0 People Going</h6>
