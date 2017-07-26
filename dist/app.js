@@ -16561,7 +16561,9 @@ var EachPlace = function (_React$Component3) {
               'h6',
               null,
               this.getWhoGoes(),
-              ' People Going'
+              ' ',
+              this.getWhoGoes() == 1 ? "Person" : "People",
+              ' Going'
             ),
             this.props.loggedIn ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'center',

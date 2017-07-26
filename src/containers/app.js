@@ -223,7 +223,7 @@ class EachPlace extends React.Component
                   <h6>{this.props.place.location.address1}</h6>
         <h6>{this.props.place.location.city}, {this.props.place.location.zip_code}</h6>
           <h6>{this.props.place.price}</h6>
-          <h6>{this.getWhoGoes()} People Going</h6>
+          <h6>{this.getWhoGoes()} {this.getWhoGoes()==1 ? "Person" :"People"} Going</h6>
           {this.props.loggedIn ? 
           <center>
           <button className="btn"
