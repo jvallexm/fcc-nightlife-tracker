@@ -100,7 +100,7 @@ io.on('connection', (socket) => {
     
     app.get('/getbars/:zip_code',(req,res)=>{
        console.log("getting for zip code: " + req.params.zip_code);  
-        yelp.search({term: "bar",location: req.params.zip_code, limit: 25})
+        yelp.search({term: "bar",location: req.params.zip_code, limit: 10})
        .then((data)=>{
            res.send(data);
        });

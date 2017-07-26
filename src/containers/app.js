@@ -80,7 +80,10 @@ export default class App extends React.Component
   }
   render()
   {
-    return(<div className="text-center container-fluid">
+    return(<div>
+        <img className="banner" 
+            onClick={()=>window.open("https://github.com/jvallexm")} src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" />
+        <div className="text-center container-fluid">
         <div className="from-top">
         <h1>I Love the Night Life Baby</h1>
         <h3>Using the Yelp API!</h3> 
@@ -107,6 +110,10 @@ export default class App extends React.Component
                   update={this.update}
                   pull={this.pull}/>)}
         </div>  
+      </div>
+      <center className="gray">
+        Jennifer Valle Made This in 2017!
+      </center>
       </div>);
   }
 }
@@ -210,7 +217,7 @@ class EachPlace extends React.Component
 
        <div className="row"> 
        <div className="col-sm-6">  
-       <img src={this.props.place.image_url} />
+       <img src={this.props.place.image_url} className="img" />
        </div> 
         <div className="col-sm-6  middle-text padding-10">
                   <h6>{this.props.place.location.address1}</h6>

@@ -32,7 +32,7 @@ h4
 {
       font-family: "Shrikhand";
 }
-img
+.img
 {
   max-width: 250px;
   max-height: 200px;
@@ -81,4 +81,14 @@ input
   margin-right: 10px;
   margin-bottom: 20px;
   text-align: center;
+}
+.banner
+{
+  position: absolute; top: 0; left: 0; border: 0;
+  z-index: 12;
+}
+.gray
+{
+  color: gray;
+  font-size: 75%;
 }

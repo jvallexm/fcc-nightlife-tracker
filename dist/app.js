@@ -16356,41 +16356,54 @@ var App = function (_React$Component) {
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
-        { className: 'text-center container-fluid' },
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'banner',
+          onClick: function onClick() {
+            return window.open("https://github.com/jvallexm");
+          }, src: 'https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67', alt: 'Fork me on GitHub', 'data-canonical-src': 'https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png' }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
-          { className: 'from-top' },
+          { className: 'text-center container-fluid' },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'h1',
-            null,
-            'I Love the Night Life Baby'
+            'div',
+            { className: 'from-top' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'h1',
+              null,
+              'I Love the Night Life Baby'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'h3',
+              null,
+              'Using the Yelp API!'
+            )
           ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(SearchBar, { enterSearch: this.enterSearch }),
+          !this.state.loggedIn ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_facebook_login___default.a, {
+            cssClass: 'well',
+            appId: '126074648007951',
+            autoLoad: true,
+            fields: 'name,picture',
+            callback: this.responseFacebook,
+            onClick: console.log("trying to login with facebook") }) : "",
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'h3',
-            null,
-            'Using the Yelp API!'
+            'div',
+            { className: 'text-center container-fluid max-1100' },
+            this.state.data.businesses.map(function (d, i) {
+              return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(EachPlace, { key: JSON.stringify(d),
+                place: d,
+                loggedIn: _this3.state.loggedIn,
+                userData: _this3.state.userData,
+                whoIsGoing: _this3.state.whoIsGoing,
+                update: _this3.update,
+                pull: _this3.pull });
+            })
           )
         ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(SearchBar, { enterSearch: this.enterSearch }),
-        !this.state.loggedIn ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_facebook_login___default.a, {
-          cssClass: 'well',
-          appId: '126074648007951',
-          autoLoad: true,
-          fields: 'name,picture',
-          callback: this.responseFacebook,
-          onClick: console.log("trying to login with facebook") }) : "",
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'div',
-          { className: 'text-center container-fluid max-1100' },
-          this.state.data.businesses.map(function (d, i) {
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(EachPlace, { key: JSON.stringify(d),
-              place: d,
-              loggedIn: _this3.state.loggedIn,
-              userData: _this3.state.userData,
-              whoIsGoing: _this3.state.whoIsGoing,
-              update: _this3.update,
-              pull: _this3.pull });
-          })
+          'center',
+          { className: 'gray' },
+          'Jennifer Valle Made This in 2017!'
         )
       );
     }
@@ -16522,7 +16535,7 @@ var EachPlace = function (_React$Component3) {
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             { className: 'col-sm-6' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: this.props.place.image_url })
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: this.props.place.image_url, className: 'img' })
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
