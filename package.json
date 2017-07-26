@@ -31,6 +31,8 @@
     "react-dom": "^15.4.2",
     "react-facebook-login": "^3.6.2",
     "request": "*",
+    "socket.io": "^2.0.3",
+    "socket.io-client": "^2.0.3",
     "twitter": "^1.7.1",
     "yelp-api-v3": "^1.5.0"
   },
